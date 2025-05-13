@@ -1,0 +1,314 @@
+/* Enhanced Modern CSS with advanced animations and effects */
+:root {
+    --primary-color: #c4a01c;
+    --secondary-color: #a88a17;
+    --gradient-start: #c4a01c;
+    --gradient-end: #ffd700;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23c4a01c" opacity="0.05"/></svg>') 0 0/50px 50px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    perspective: 1000px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transform: translateY(0) rotateX(0);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px) rotateX(2deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1em;
+    transform: translateY(0);
+    transition: var(--transition);
+}
+
+.form-group:focus-within label {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1.1em;
+    transition: var(--transition);
+    background: white;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(196, 160, 28, 0.15);
+    transform: scale(1.01);
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(196, 160, 28, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+    font-size: 1.2em;
+    animation: slideIn 0.5s ease-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.note {
+    margin-top: 25px;
+    color: #666;
+    font-size: 0.9em;
+    text-align: center;
+    font-style: italic;
+    padding: 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+/* Header decoration */
+.header-decoration {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.gold-icon {
+    font-size: 3em;
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Enhanced Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 5px rgba(196, 160, 28, 0.2);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(196, 160, 28, 0.4);
+    }
+}
+
+/* Glass morphism effect for form elements */
+.form-group::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    border-radius: var(--border-radius);
+    z-index: -1;
+    transform: scale(0.98);
+    transition: var(--transition);
+}
+
+.form-group:hover::before {
+    transform: scale(1);
+}
+
+/* Responsive design with enhanced mobile experience */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px auto;
+    }
+    
+    .card {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    .result {
+        font-size: 1.1em;
+    }
+    
+    button {
+        padding: 14px;
+        font-size: 1.1em;
+    }
+    
+    .gold-icon {
+        font-size: 2.5em;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1a1a;
+        --text-color: #e1e1e1;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    }
+    
+    .card {
+        background: rgba(30, 30, 30, 0.95);
+    }
+    
+    input[type="number"],
+    select {
+        background: rgba(45, 45, 45, 0.9);
+        color: #e1e1e1;
+        border-color: #444;
+    }
+    
+    .result {
+        background: linear-gradient(135deg, rgba(40,40,40,0.9), rgba(35,35,35,0.8));
+        color: #e1e1e1;
+    }
+    
+    .note {
+        color: #999;
+        border-top-color: rgba(255,255,255,0.1);
+    }
+} 
