@@ -1,41 +1,42 @@
-from flask import Flask, request, jsonify, render_template 
-import joblib 
+from flask import Flask, request, render_template
+import numpy as np
+import joblib
+from datetime import datetime
 
-model = joblib.load('polynomial_regression_model.pkl')
-
+# Create Flask app
 app = Flask(__name__)
 
+# Load the model and transformer
+try:
+    model = joblib.load('polynomial_regression_model.pkl')
+except:
+    model = joblib.load('Gold-Price-Prediction-Web-Application-main/polynomial_regression_model.pkl')
+
 @app.route('/')
-
 def home():
-    return "Polynomial Regression API is running!"  #
-
-@app.route('/predict', methods=['POST'])
-
-def predict():
-
-    data = request.get_json()
-
-    year = data.get('Year')
-
-    if not year:
-        return jsonify({'error': 'Year is required'}), 400 
-    
-    try:
-        prediction = model.predict([[int(year+1)]])[0]
-
-        return jsonify({
-            'Year': year, 
-            'Predicted Gold Price': round(prediction, 2) 
-        })
-    except Exception as e:
-
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/web')
-def web():
-    
     return render_template('index.html')
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        # Get the year from form data
+        year = int(request.form.get('year'))
+        
+        # Prepare input data
+        X = np.array([[year]])
+        
+        # Make prediction
+        prediction = model.predict(X)[0]
+        
+        # Return prediction
+        return render_template('index.html', 
+                             prediction=f"Predicted Gold Price for year {year}: ₹{prediction:,.2f}")
+    
+    except Exception as e:
+        print(f"Error during prediction: {str(e)}")
+        return render_template('index.html', 
+                             prediction=f"Error: {str(e)}")
+
 if __name__ == '__main__':
-    app.run(debug=True) 
+    # Run the app on all network interfaces
+    app.run(host='0.0.0.0', port=8080, debug=True)
