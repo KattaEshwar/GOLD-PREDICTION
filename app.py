@@ -4,6 +4,7 @@ import joblib
 from datetime import datetime
 import logging
 import os
+from waitress import serve
 
 # Configure logging
 logging.basicConfig(
@@ -79,8 +80,6 @@ def predict():
         logger.error(f"Error during prediction: {str(e)}")
         return render_template('index.html', 
                              prediction=f"Error: {str(e)}")
-
-from waitress import serve
 
 if __name__ == '__main__':
     serve(app, host='0.0.0.0', port=8080)
